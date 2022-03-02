@@ -38,14 +38,15 @@ class DSU{
 
 // disjointset union by Rank
 
-class DSURank{
+
+class DSU{
     private:
-        vector<int>parent,rank;
+        vector<int>parent,size;
     public:
-        DSURank(int n){
-            for(int i = 0; i < n; i++){
+        DSU(int n){
+            for(int i = 0; i <= n; i++){
                 parent.push_back(i);
-                rank.push_back(1);
+                size.push_back(1);
             }
         }
         void Union(int u,int v){
@@ -54,15 +55,13 @@ class DSURank{
             if(parU == parV){
                 return ;
             }
-            if(rank[parU] == rank[parV]){
-                parent[parV] = parU;
-                rank[parV]++;
-            }
-            if(rank[parU] == rank[parV]){
-                parent[parU] = parV; 
+
+            if(size[parU] < size[parV]){
+                parent[parU] = parV;
+                size[parV] += size[parU];
             }else{
                 parent[parV] = parU;
-                rank[parU] += 1;
+                size[parU] += size[parV];
             }
         }
 
@@ -72,4 +71,4 @@ class DSURank{
             }
             return parent[node] = findParent(parent[node]);
         }
-}
+};
