@@ -44,10 +44,12 @@ class DSU{
       void init(int n){
           for(int i = 0; i < n; i++){
               parent[i] = i;
+              rank[i] = 0;
           }
       }
       DSU(int n){
           parent.resize(n);
+          rank.resize(n);
           init(n);
       }
       
